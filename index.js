@@ -75,7 +75,7 @@ app.post('/api/users', async (req, res) => {
 app.get('/api/users', async (req, res) => {
     try {
       const peopleCollection = client.db('gengdb').collection('users'); // Use the correct database and collection names
-      const people = await peopleCollection.find().toArray();
+      const people = await peopleCollection.find({}, { projection : { username: 1, _id: 1}} ).toArray();
       res.status(200).json({
         data: people
       });
